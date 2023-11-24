@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rightButton = document.getElementById('right-button');
     const downButton = document.getElementById('down-button');
 
-    const gridSize = 15; // Reduzi o tamanho do grid para ficar mais proporcional
+    const gridSize = 15;
     const snakeSize = 20;
     let snake = [{ x: 0, y: 0 }];
     let food = generateFood();
@@ -18,16 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
         do {
             x = Math.floor(Math.random() * gridSize) * snakeSize;
             y = Math.floor(Math.random() * gridSize) * snakeSize;
-        } while (snake.some(segment => segment.x === x && segment.y === y)); // Garante que a fruta não apareça na cobra
+        } while (snake.some(segment => segment.x === x && segment.y === y));
 
         return { x, y };
     }
 
     function draw() {
-        // Limpa o tabuleiro
         board.innerHTML = '';
 
-        // Desenha a cobra
         snake.forEach(segment => {
             const snakeElement = document.createElement('div');
             snakeElement.style.left = `${segment.x}px`;
@@ -36,19 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
             board.appendChild(snakeElement);
         });
 
-        // Desenha a comida
         const foodElement = document.createElement('div');
         foodElement.style.left = `${food.x}px`;
         foodElement.style.top = `${food.y}px`;
         foodElement.classList.add('food');
         board.appendChild(foodElement);
 
-        // Atualiza a pontuação
         scoreElement.textContent = score;
     }
 
     function update() {
-        // Atualiza a posição da cobra
         const head = { ...snake[0] };
         switch (direction) {
             case 'UP':
@@ -65,25 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
 
-        // Verifica colisões
         if (head.x < 0 || head.x >= gridSize * snakeSize || head.y < 0 || head.y >= gridSize * snakeSize) {
             alert('Game Over! Pontuação: ' + score);
             resetGame();
             return;
         }
 
-        // Verifica se a cobra comeu a comida
         if (head.x === food.x && head.y === food.y) {
             snake.unshift(food);
             food = generateFood();
-            score += 10; // Incrementa a pontuação ao comer a comida
+            score += 10;
         } else {
-            // Move a cobra
             snake.pop();
             snake.unshift(head);
         }
 
-        // Desenha o tabuleiro
         draw();
     }
 
@@ -91,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         snake = [{ x: 0, y: 0 }];
         food = generateFood();
         direction = 'RIGHT';
-        score = 0; // Zera a pontuação ao reiniciar o jogo
+        score = 0;
         draw();
     }
 
