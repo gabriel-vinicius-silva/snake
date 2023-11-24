@@ -18,7 +18,7 @@ body {
     height: 300px;
     border: 1px solid #fff;
     position: relative;
-    overflow: hidden; /* Impede que a cobra saia do quadrado */
+    overflow: hidden;
 }
 
 .snake, .food {
@@ -35,15 +35,18 @@ body {
 #score {
     margin-top: 20px;
     font-size: 18px;
+    text-align: center;
 }
 
 #controls {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
     margin-top: 10px;
 }
 
 button {
+    margin: 5px;
     padding: 10px;
     font-size: 18px;
     background-color: #4CAF50;
@@ -51,6 +54,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -66,6 +70,7 @@ button:hover {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 #reset-button:hover {
